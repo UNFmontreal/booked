@@ -458,9 +458,11 @@ class en_us extends Language
 		$strings['ReminderSendtimeTime'] = 'Time of Reminder (HH:MM)';
 		$strings['ReminderSendtimeAMPM'] = 'AM / PM';
 		$strings['AddReminder'] = 'Add Reminder';
-        $strings['DeleteReminderWarning'] = 'Are you sure you want to delete this?
+        $strings['DeleteReminderWarning'] = 'Are you sure you want to delete this?</br>
+
 If you cancel a booked session, it will be immediately removed from the calendar and made available for other researchers.
-A confirmation email will be automatically sent to you.
+A confirmation email will be automatically sent to you.</br>
+
 <b>Please note that any MRI session cancelled less than seven (7) days in advance will be charged at the normal rate unless re-booked by another group.</b>';
         $strings['NoReminders'] = 'You have no upcoming reminders.';
 		$strings['Reminders'] = 'Reminders';
