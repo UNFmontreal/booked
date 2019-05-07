@@ -144,6 +144,12 @@ class fr_fr extends en_gb
 		$strings['ResourcePermissionNotAutoGranted'] = 'La permission n\'est pas automatique';
 		$strings['ResourceMinNotice'] = 'Les réservations doivent être créées au moins %s avant l\'heure de début de réservation';
 		$strings['ResourceMinNoticeNone'] = 'Les réservations peuvent être saisies jusqu\'au dernier moment ';
+
+		$strings['ResourceMinNoticeUpdate'] = 'Reservations must be updated at least %s prior to start time';^M
+		$strings['ResourceMinNoticeNoneUpdate'] = 'Reservations can be updated up until the current time';^M
+		$strings['ResourceMinNoticeDelete'] = 'Reservations must be deleted at least %s prior to start time';^M
+		$strings['ResourceMinNoticeNoneDelete'] = 'Reservations can be deleted up until the current time';
+
 		$strings['ResourceMaxNotice'] = 'Les réservations ne doivent pas finir plus loin que %s du moment présent';
 		$strings['ResourceMaxNoticeNone'] = 'Les réservations peuvent finir n\'importe quand';
 		$strings['ResourceBufferTime'] = 'Il doit y avoir %s entre les réservations';
