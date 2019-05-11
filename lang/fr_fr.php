@@ -635,7 +635,7 @@ class fr_fr extends en_gb
 Si vous annulez une réservation, celle-ci sera immédiatement retirée du calendrier.
 et sera disponible pour d'autres chercheurs. Un courriel confirmant votre annulation
 vous sera alors automatiquement envoyé.</br>
-<b>Veuillez noter que toute annulation d'une session d'IRM faite moins de sept (7) jours d'avance sera facturée au taux horaire applicable à moins d'être utilisée par un autre groupe</b>"
+<b>Veuillez noter que toute annulation d'une session d'IRM faite moins de sept (7) jours d'avance sera facturée au taux horaire applicable à moins d'être utilisée par un autre groupe</b>";
 		//
 
 		$this->Strings = $strings;
