@@ -44,10 +44,10 @@ class en_us extends Language
         $dates['period_time'] = "H:i";
         $dates['timepicker'] = 'H:i';
         $dates['general_date_js'] = "yy/mm/dd";
-		$dates['short_datetime'] = 'j/n/y H:i';
+		$dates['short_datetime'] = 'Y/n/j H:i';
 		$dates['schedule_daily'] = 'l, Y/m/d';
 		$dates['res_popup_time'] = 'D, d/n H:i';
-		$dates['short_reservation_date'] = 'y/n/j H:i';
+		$dates['short_reservation_date'] = 'Y/n/j H:i';
 		$dates['mobile_reservation_date'] = 'n/j H:i';
         $dates['general_time_js'] = 'H:mm';
         $dates['timepicker_js'] = 'H:i';
