@@ -30,37 +30,34 @@ class en_us extends Language
 	/**
 	 * @return array
 	 */
-	protected function _LoadDates()
-	{
-		$dates = array();
 
-		$dates['general_date'] = 'm/d/Y';
-		$dates['general_datetime'] = 'm/d/Y g:i:s A';
-		$dates['short_datetime'] = 'n/j/y g:i A';
-		$dates['schedule_daily'] = 'l, n/j/y';
-		$dates['reservation_email'] = 'm/d/Y @ g:i A (e)';
-		$dates['res_popup'] = 'D, n/d g:i A';
-		$dates['res_popup_time'] = 'g:i A';
-		$dates['short_reservation_date'] = 'n/j/y g:i A';
-		$dates['dashboard'] = 'D, n/d g:i A';
-		$dates['period_time'] = 'g:i A';
-		$dates['timepicker'] = 'h:i a';
-		$dates['mobile_reservation_date'] = 'n/j g:i A';
-		$dates['general_date_js'] = 'mm/dd/yy';
-        $dates['general_time_js'] = 'h:mm tt';
-        $dates['timepicker_js'] = 'h:i a';
-        $dates['momentjs_datetime'] = 'M/D/YY h:mm A';
-		$dates['calendar_time'] = 'h:mmt';
-		$dates['calendar_dates'] = 'M d';
-		$dates['embedded_date'] = 'D d';
-		$dates['embedded_time'] = 'g:i A';
-		$dates['embedded_datetime'] = 'n/j g:i A';
-		$dates['report_date'] = '%m/%d';
-
-		$this->Dates = $dates;
-
-		return $this->Dates;
-	}
+    protected function _LoadDates()
+    {
+        $dates = parent::_LoadDates();
+        // change defaults here
+        $dates['general_date'] = 'd/m/Y';
+        $dates['general_datetime'] = 'd/m/Y H:i:s';
+        $dates['schedule_daily'] = 'l, d/m/Y';
+        $dates['reservation_email'] = 'd/m/Y @ H:i (e)';
+        $dates['res_popup'] = 'd/m/Y H:i';
+        $dates['dashboard'] = 'l, d/m/Y H:i';
+        $dates['period_time'] = "H:i";
+        $dates['timepicker'] = 'H:i';
+        $dates['general_date_js'] = "dd/mm/yy";
+		$dates['short_datetime'] = 'j/n/y H:i';
+		$dates['schedule_daily'] = 'l, d/m/Y';
+		$dates['res_popup_time'] = 'D, d/n H:i';
+		$dates['short_reservation_date'] = 'j/n/y H:i';
+		$dates['mobile_reservation_date'] = 'j/n H:i';
+        $dates['general_time_js'] = 'H:mm';
+        $dates['timepicker_js'] = 'H:i';
+        $dates['momentjs_datetime'] = 'D/M/YY H:mm';
+		$dates['calendar_time'] = 'H:mm';
+		$dates['calendar_dates'] = 'd M';
+        $dates['report_date'] = '%d/%m';
+        $this->Dates = $dates;
+        return $this->Dates;
+    }
 
 	/**
 	 * @return array
