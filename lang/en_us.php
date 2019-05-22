@@ -33,7 +33,7 @@ class en_us extends Language
 
     protected function _LoadDates()
     {
-        $dates = parent::_LoadDates();
+	$dates = array();
         // change defaults here
         $dates['general_date'] = 'd/m/Y';
         $dates['general_datetime'] = 'd/m/Y H:i:s';
