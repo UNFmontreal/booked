@@ -35,26 +35,26 @@ class en_us extends Language
     {
 	$dates = array();
         // change defaults here
-        $dates['general_date'] = 'd/m/Y';
-        $dates['general_datetime'] = 'd/m/Y H:i:s';
-        $dates['schedule_daily'] = 'l, d/m/Y';
-        $dates['reservation_email'] = 'd/m/Y @ H:i (e)';
-        $dates['res_popup'] = 'd/m/Y H:i';
-        $dates['dashboard'] = 'l, d/m/Y H:i';
+        $dates['general_date'] = 'Y/m/d';
+        $dates['general_datetime'] = 'Y/m/d H:i:s';
+        $dates['schedule_daily'] = 'l, Y/m/d';
+        $dates['reservation_email'] = 'Y/m/d @ H:i (e)';
+        $dates['res_popup'] = 'Y/m/d H:i';
+        $dates['dashboard'] = 'l, Y/m/d H:i';
         $dates['period_time'] = "H:i";
         $dates['timepicker'] = 'H:i';
-        $dates['general_date_js'] = "dd/mm/yy";
+        $dates['general_date_js'] = "yy/mm/dd";
 		$dates['short_datetime'] = 'j/n/y H:i';
-		$dates['schedule_daily'] = 'l, d/m/Y';
+		$dates['schedule_daily'] = 'l, Y/m/d';
 		$dates['res_popup_time'] = 'D, d/n H:i';
-		$dates['short_reservation_date'] = 'j/n/y H:i';
-		$dates['mobile_reservation_date'] = 'j/n H:i';
+		$dates['short_reservation_date'] = 'y/n/j H:i';
+		$dates['mobile_reservation_date'] = 'n/j H:i';
         $dates['general_time_js'] = 'H:mm';
         $dates['timepicker_js'] = 'H:i';
-        $dates['momentjs_datetime'] = 'D/M/YY H:mm';
+        $dates['momentjs_datetime'] = 'YY/M/D H:mm';
 		$dates['calendar_time'] = 'H:mm';
-		$dates['calendar_dates'] = 'd M';
-        $dates['report_date'] = '%d/%m';
+		$dates['calendar_dates'] = 'M d';
+        $dates['report_date'] = '%m/%d';
         $this->Dates = $dates;
         return $this->Dates;
     }
