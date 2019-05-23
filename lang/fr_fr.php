@@ -202,7 +202,7 @@ class fr_fr extends en_gb
 		$strings['AccessoryName'] = 'Nom de l\'accessoire';
 		$strings['QuantityAvailable'] = 'Quantité disponible';
 		$strings['Resources'] = 'Ressources';
-		$strings['Participants'] = 'Participants';
+		$strings['Participants'] = 'Collaborateurs';
 		$strings['User'] = 'Utilisateur';
 		$strings['Resource'] = 'Ressource';
 		$strings['Status'] = 'Statut';
@@ -255,8 +255,8 @@ class fr_fr extends en_gb
 		$strings['ChangeUser'] = 'Changer d\'Utilisateur';
 		$strings['MoreResources'] = '+ de  Resources';
 		$strings['ReservationLength'] = 'Durée de la réservation :';
-		$strings['ParticipantList'] = 'Liste des participants';
-		$strings['AddParticipants'] = 'Ajouter des Participants';
+		$strings['ParticipantList'] = 'Liste des collaborateurs';
+		$strings['AddParticipants'] = 'Ajouter des Collaborateurs';
 		$strings['InviteOthers'] = 'Autres Invités';
 		$strings['AddResources'] = 'Ajouter des Ressources';
 		$strings['AddAccessories'] = 'Ajouter des Accessoires';
@@ -436,7 +436,7 @@ class fr_fr extends en_gb
 		$strings['LimitAttributeScope'] = 'Afficher dans des Cas Spécifiques';
 		$strings['CollectFor'] = 'Afficher pour';
 		$strings['SignIn'] = 'Connexion';
-		$strings['AllParticipants'] = 'Tous les Participants';
+		$strings['AllParticipants'] = 'Tous les Collaborateurs';
 		$strings['More'] = 'Plus';
 		$strings['ResourceAvailability'] = 'Disponibilité des Ressources';
 		$strings['UnavailableAllDay'] = 'Indisponible toute la Journée';
@@ -622,7 +622,7 @@ class fr_fr extends en_gb
 		$strings['ReservationCreatedAdminSubject'] = 'Notification: Une réservation a été créée';
 		$strings['ReservationUpdatedAdminSubject'] = 'Notification: Une réservation a été mise à jour';
 		$strings['ReservationDeleteAdminSubject'] = 'Notification: Une réservation a été effacée';
-		$strings['ParticipantAddedSubject'] = 'Notication de Participation à une Réservation';
+		$strings['ParticipantAddedSubject'] = 'Notication de Collaboration à une Réservation';
 		$strings['ParticipantDeletedSubject'] = 'Réservation Effacée';
 		$strings['InviteeAddedSubject'] = 'Invitation à une Réservation';
 		$strings['ResetPasswordRequest'] = 'Demande de Réinitialisation du Mot de Passe';
