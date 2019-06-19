@@ -824,7 +824,7 @@ A confirmation email will be automatically sent to you.</br>
 		// Errors
 		$strings['LoginError'] = 'We could not match your username or password';
 		$strings['ReservationFailed'] = 'Your reservation could not be made';
-		$strings['MinNoticeError'] = 'This reservation requires advance notice. The earliest date and time that can be reserved is %s.';
+		$strings['MinNoticeError'] = 'This reservation requires advance notice. The earliest date and time that can be reserved is %s. Please contact UNF to confirm availability.';
 		$strings['MinNoticeErrorUpdate'] = 'Changing this reservation requires advance notice. Reservations before %s are not allowed to be changed.';
 		$strings['MinNoticeErrorDelete'] = 'Deleting this reservation requires advance notice. Reservations before %s are not allowed to be deleted.';
 		$strings['MaxNoticeError'] = 'This reservation cannot be made this far in the future. The latest date and time that can be reserved is %s.';
