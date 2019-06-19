@@ -142,7 +142,7 @@ class fr_fr extends en_gb
 		$strings['ResourceRequiresApprovalNone'] = 'Les réservations ne nécessitent pas d\'approbation';
 		$strings['ResourcePermissionAutoGranted'] = 'La permission est automatique';
 		$strings['ResourcePermissionNotAutoGranted'] = 'La permission n\'est pas automatique';
-		$strings['ResourceMinNotice'] = 'Les réservations doivent être créées au moins %s avant l\'heure de début de réservation';
+		$strings['ResourceMinNotice'] = 'Les réservations doivent être créées au moins %s avant l\'heure de début de réservation. Veuillez contacter l\'UNF pour confirmer la disponibilité.';
 		$strings['ResourceMinNoticeNone'] = 'Les réservations peuvent être saisies jusqu\'au dernier moment ';
 		$strings['ResourceMaxNotice'] = 'Les réservations ne doivent pas finir plus loin que %s du moment présent';
 		$strings['ResourceMaxNoticeNone'] = 'Les réservations peuvent finir n\'importe quand';
