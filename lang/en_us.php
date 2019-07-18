@@ -780,6 +780,8 @@ A confirmation email will be automatically sent to you.</br>
         $strings['ReservationDetails'] = 'Reservation Details';
         $strings['StartTime'] = 'Start Time';
         $strings['EndTime'] = 'End Time';
+        $strings['New'] = 'New';
+        $strings['Updated'] = 'Updated';
         // End Strings
 
 		// Install
