@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -85,6 +85,13 @@ class Pages
 
     public static function GetAvailablePages()
     {
-        return array_filter(self::$_pages, function($key) { return $key != Pages::ID_LOGIN; }, ARRAY_FILTER_USE_KEY);
+    	$pages = array();
+    	foreach(self::$_pages as $key => $page) {
+    		if ($key != Pages::ID_LOGIN) {
+    			$pages[$key] = $page;
+			}
+		}
+    	
+    	return $pages;
     }
 }

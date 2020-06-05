@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -157,6 +157,8 @@ class ConfigKeys
 
 	const TABLET_VIEW_ALLOW_GUESTS = 'allow.guest.reservations';
 	const TABLET_VIEW_AUTOCOMPLETE = 'auto.suggest.emails';
+
+	const USE_DATABASE_SESSION = 'use.database.session';
 }
 
 class ConfigSection

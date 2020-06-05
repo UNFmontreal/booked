@@ -1,5 +1,5 @@
 {*
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -240,8 +240,15 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
         $(document).ready(function () {
             $('#detectTimezone').click(function (e) {
                 e.preventDefault();
-                var timezone = jstz.determine_timezone();
-                $('#timezoneDropDown').val(timezone.name());
+
+                if (Intl.DateTimeFormat)
+                {
+                    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                }else {
+                    var timezone = jstz.determine_timezone().name();
+                }
+
+                $('#timezoneDropDown').val(timezone);
             });
 
             var registrationPage = new Registration();

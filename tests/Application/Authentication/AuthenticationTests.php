@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -75,13 +75,17 @@ class AuthenticationTests extends TestBase
 	 * @var IUserRepository|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private $userRepository;
+	/**
+	 * @var IGroupRepository|PHPUnit_Framework_MockObject_MockObject
+	 */
+	private $groupRepository;
 
 	/**
 	 * @var FakeFirstRegistrationStrategy
 	 */
 	private $fakeFirstRegistration;
 
-	function setup()
+	function setup(): void
 	{
 		parent::setup();
 
@@ -116,11 +120,12 @@ class AuthenticationTests extends TestBase
 		$this->fakeMigration = new FakeMigration();
 		$this->fakeMigration->_Password = $this->fakePassword;
 
-		$this->authorization = $this->getMock('IRoleService');
-		$this->userRepository = $this->getMock('IUserRepository');
+		$this->authorization = $this->createMock('IRoleService');
+		$this->userRepository = $this->createMock('IUserRepository');
+		$this->groupRepository = $this->createMock('IGroupRepository');
 		$this->fakeFirstRegistration = new FakeFirstRegistrationStrategy();
 
-		$this->auth = new Authentication($this->authorization, $this->userRepository);
+		$this->auth = new Authentication($this->authorization, $this->userRepository, $this->groupRepository);
 		$this->auth->SetMigration($this->fakeMigration);
 		$this->auth->SetFirstRegistrationStrategy($this->fakeFirstRegistration);
 
@@ -280,8 +285,9 @@ class FakeFirstRegistrationStrategy implements IFirstRegistrationStrategy
 {
 	public $_Handled;
 
-	public function HandleLogin(User $user, IUserRepository $userRepository)
+	public function HandleLogin(User $user, IUserRepository $userRepository, IGroupRepository $groupRepository)
 	{
 		$this->_Handled = true;
+		return $user;
 	}
 }

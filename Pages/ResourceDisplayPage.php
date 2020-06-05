@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2017-2019 Nick Korbel
+ * Copyright 2017-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -165,6 +165,7 @@ class ResourceDisplayPage extends ActionPage implements IResourceDisplayPage, IR
             new TermsOfServiceRepository());
 
         $this->Set('AllowAutocomplete', Configuration::Instance()->GetSectionKey(ConfigSection::TABLET_VIEW, ConfigKeys::TABLET_VIEW_AUTOCOMPLETE, new BooleanConverter()));
+		$this->Set('ShouldLogout', false);
     }
 
     public function ProcessAction()

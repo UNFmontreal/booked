@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -98,5 +98,10 @@ class TestReservationSeries extends ReservationSeries
 	public function WithCreditsRequired($credits)
 	{
 		$this->creditsRequired = $credits;
+	}
+
+	public function GetCreditsRequired()
+	{
+		return $this->creditsRequired;
 	}
 }

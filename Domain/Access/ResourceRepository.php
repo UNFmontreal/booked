@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -246,7 +246,8 @@ class ResourceRepository implements IResourceRepository
 				$resource->GetCreditsPerSlot(),
 				$resource->GetPeakCreditsPerSlot(),
                 $resource->GetMinNoticeUpdate(),
-                $resource->GetMinNoticeDelete()
+                $resource->GetMinNoticeDelete(),
+				$resource->GetSerializedProperties()
 		);
 
 		$db->Execute($updateResourceCommand);

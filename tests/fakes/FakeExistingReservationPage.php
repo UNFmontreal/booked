@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2017-2019 Nick Korbel
+ * Copyright 2017-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -272,4 +272,14 @@ class FakeExistingReservationPage extends FakePageBase implements IExistingReser
     {
         // TODO: Implement SetTermsAccepted() method.
     }
+
+    public function SetCustomRepeatDates($customRepeatDates)
+    {
+        // TODO: Implement SetCustomRepeatDates() method.
+    }
+
+	public function SetMaximumResources($maximum)
+	{
+		// TODO: Implement SetMaximumResources() method.
+	}
 }

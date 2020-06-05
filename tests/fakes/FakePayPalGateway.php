@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2017-2019 Nick Korbel
+ * Copyright 2017-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -34,8 +34,8 @@ class FakePayPalGateway extends PayPalGateway
 
     public function __construct()
     {
-        $this->_Payment = new \PayPal\Api\Payment();
-        $this->_Refund = new \PayPal\Api\DetailedRefund();
+        $this->_Payment = new stdClass();
+        $this->_Refund = new stdClass();
         parent::__construct(true, null, null, null);
     }
 

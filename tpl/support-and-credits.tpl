@@ -1,5 +1,5 @@
 {*
-Copyright 2012-2019 Nick Korbel
+Copyright 2012-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -25,9 +25,9 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 
         <h2>Support</h2>
 
-        <p><a href="https://www.bookedscheduler.com/">Booked Scheduler Official Home</a></p>
-        <p><a href="http://www.twinkletoessoftware.com">Twinkle Toes Software</a></p>
-        <p><a href="http://php.brickhost.com/forums/">Booked Scheduler Community Support</a></p>
+        <p><a href="https://www.bookedscheduler.com">Booked Scheduler Official Home</a></p>
+        <p><a href="https://www.twinkletoessoftware.com">Twinkle Toes Software</a></p>
+        <p><a href="https://forums.bookedscheduler.com">Booked Scheduler Community Support</a></p>
 
         <h2>Credits</h2>
 

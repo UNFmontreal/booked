@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2017-2019 Nick Korbel
+ * Copyright 2017-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -60,7 +60,7 @@ class CreditLogView
      * @param array $row
      * @return CreditLogView
      */
-    public function Populate($row)
+    public static function Populate($row)
     {
         $userName = '';
         if (isset($row[ColumnNames::FIRST_NAME]))

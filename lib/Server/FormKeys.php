@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,6 +61,7 @@ class FormKeys
 	const AVAILABLE_ALL_YEAR = 'AVAILABLE_ALL_YEAR';
 	const AVAILABLE_BEGIN_DATE = 'AVAILABLE_BEGIN_DATE';
 	const AVAILABLE_END_DATE = 'AVAILABLE_END_DATE';
+	const ALLOW_CONCURRENT_RESERVATIONS = 'ALLOW_CONCURRENT_RESERVATIONS';
 
 	const BEGIN_DATE = 'beginDate';
 	const BEGIN_PERIOD = 'beginPeriod';
@@ -149,8 +150,14 @@ class FormKeys
 	const MIN_NOTICE_NONE_ADD = 'minNoticeNoneAdd';
 	const MIN_NOTICE_NONE_UPDATE = 'minNoticeNoneUpdate';
 	const MIN_NOTICE_NONE_DELETE = 'minNoticeNoneDelete';
+	const MIN_CAPACITY = 'MIN_CAPACITY';
 	const MAX_NOTICE = 'maxNotice';
 	const MAX_NOTICE_NONE = 'maxNoticeNone';
+	const MAXIMUM_CONCURRENT_UNLIMITED = 'MAXIMUM_CONCURRENT_UNLIMITED';
+	const MAXIMUM_CONCURRENT_RESERVATIONS = 'MAXIMUM_CONCURRENT_RESERVATIONS';
+	const MAXIMUM_RESOURCES_PER_RESERVATION_UNLIMITED = 'MAXIMUM_RESOURCES_PER_RESERVATION_UNLIMITED';
+	const MAXIMUM_RESOURCES_PER_RESERVATION = 'MAXIMUM_RESOURCES_PER_RESERVATION';
+	const MAX_CONCURRENT_RESERVATIONS = 'MAX_CONCURRENT_RESERVATIONS';
 
 	const NAME = 'name';
 	const NOTES = 'notes';
@@ -239,6 +246,7 @@ class FormKeys
 	const RESOURCE_STATUS_REASON_ID = 'RESOURCE_STATUS_REASON_ID';
 	const RESOURCE_STATUS_UPDATE_SCOPE = 'RESOURCE_STATUS_UPDATE_SCOPE';
 	const ROLLING = 'ROLLING';
+	const REPEAT_CUSTOM_DATES = 'repeatCustomDates';
 
 	const SCHEDULE_ID = 'scheduleId';
 	const SCHEDULE_NAME = 'scheduleName';
@@ -265,6 +273,7 @@ class FormKeys
 	const SLACK_TEXT = 'text';
 	const SLACK_TOKEN = 'token';
 	const SPECIFIC_TIME = 'SPECIFIC_TIME';
+	const SPECIFIC_DATES = 'SPECIFIC_DATES';
 
 	const THISWEEK = 'THISWEEK';
 	const TIMEZONE = 'timezone';

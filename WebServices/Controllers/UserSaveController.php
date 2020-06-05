@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2013-2019 Nick Korbel
+Copyright 2013-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -120,9 +120,9 @@ class UserSaveController implements IUserSaveController
 		}
 
 		$user = $userService->UpdateUser($userId, $request->userName, $request->emailAddress, $request->firstName,
-								 $request->lastName, $request->timezone, $extraAttributes);
+								 $request->lastName, $request->timezone, $extraAttributes, $customAttributes);
 
-		$userService->ChangeAttributes($userId, $customAttributes);
+//		$userService->ChangeAttributes($userId, $customAttributes);
 
 		$userService->ChangeGroups($user, $request->groups);
 

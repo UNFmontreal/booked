@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2012-2019 Nick Korbel
+ * Copyright 2012-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -158,6 +158,7 @@ class ColumnNames
 	const RESOURCE_ALLOW_DISPLAY = 'allow_display';
 	const RESOURCE_IMAGE_LIST = 'image_list';
     const PERMISSION_TYPE = 'permission_type';
+    const RESOURCE_ADDITIONAL_PROPERTIES = 'additional_properties';
 
 	// RESERVATION RESOURCES
 	const RESOURCE_LEVEL_ID = 'resource_level_id';
@@ -175,6 +176,8 @@ class ColumnNames
 	const SCHEDULE_AVAILABLE_END_DATE = 'end_date';
 	const SCHEDULE_ALLOW_CONCURRENT_RESERVATIONS = 'allow_concurrent_bookings';
 	const SCHEDULE_DEFAULT_STYLE = 'default_layout';
+	const TOTAL_CONCURRENT_RESERVATIONS = 'total_concurrent_reservations';
+	const MAX_RESOURCES_PER_RESERVATION = 'max_resources_per_reservation';
 
 	// EMAIL PREFERENCES //
 	const EVENT_CATEGORY = 'event_category';

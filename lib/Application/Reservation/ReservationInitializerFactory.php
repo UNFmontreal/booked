@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,9 @@ class ReservationInitializerFactory implements IReservationInitializerFactory
     private $userRepository;
 
     public function __construct(
-        IScheduleRepository $scheduleRepository, IUserRepository $userRepository, IResourceService $resourceService,
+        IScheduleRepository $scheduleRepository,
+		IUserRepository $userRepository,
+		IResourceService $resourceService,
         IReservationAuthorization $reservationAuthorization
     )
     {
@@ -52,7 +54,7 @@ class ReservationInitializerFactory implements IReservationInitializerFactory
 
         $this->userBinder = new ReservationUserBinder($userRepository, $reservationAuthorization);
         $this->dateBinder = new ReservationDateBinder($scheduleRepository);
-        $this->resourceBinder = new ReservationResourceBinder($resourceService);
+        $this->resourceBinder = new ReservationResourceBinder($resourceService, $scheduleRepository);
     }
 
     public function GetNewInitializer(INewReservationPage $page)

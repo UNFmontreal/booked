@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -71,4 +71,47 @@ interface IMutableReservationListing extends IReservationListing
 	 * @return void
 	 */
 	public function AddBlackout($blackout);
+}
+
+class EmptyReservationListing implements IReservationListing {
+
+    /**
+     * @inheritDoc
+     */
+    public function Count()
+    {
+        return 0;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function Reservations()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function OnDate($date)
+    {
+        return new EmptyReservationListing();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function ForResource($resourceId)
+    {
+        return new EmptyReservationListing();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function OnDateForResource(Date $date, $resourceId)
+    {
+        return new EmptyReservationListing();
+    }
 }

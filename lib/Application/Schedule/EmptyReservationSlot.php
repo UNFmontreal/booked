@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -131,25 +131,7 @@ class EmptyReservationSlot implements IReservationSlot
 
 	public function IsPastDate(Date $date)
 	{
-		$constraint = Configuration::Instance()->GetSectionKey(ConfigSection::RESERVATION,
-															   ConfigKeys::RESERVATION_START_TIME_CONSTRAINT);
-
-		if (empty($constraint))
-		{
-			$constraint = ReservationStartTimeConstraint::_DEFAULT;
-		}
-
-		if ($constraint == ReservationStartTimeConstraint::NONE)
-		{
-			return false;
-		}
-
-		if ($constraint == ReservationStartTimeConstraint::CURRENT)
-		{
-			return $this->_date->SetTime($this->End(), true)->LessThan($date);
-		}
-
-		return $this->_date->SetTime($this->Begin())->LessThan($date);
+		return ReservationPastTimeConstraint::IsPast($this->BeginDate(), $this->EndDate());
 	}
 
 	public function ToTimezone($timezone)

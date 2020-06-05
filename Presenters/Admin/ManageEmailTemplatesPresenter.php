@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2018-2019 Nick Korbel
+ * Copyright 2018-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -52,18 +52,17 @@ class ManageEmailTemplatesPresenter extends ActionPresenter
 
     public function PageLoad()
     {
-        $path = $this->GetTemplatePath();
+        $path = $this->GetTemplatePath('en_us');
         $this->page->SetSelectedLanguage($this->GetSelectedLanguage());
         $this->page->BindTemplateNames(EmailTemplateFile::FromFiles($this->filesystem->GetFiles($path)));
     }
 
     /**
+     * @param $language
      * @return string
      */
-    private function GetTemplatePath()
+    private function GetTemplatePath($language)
     {
-        $language = $this->GetSelectedLanguage();
-
         $path = Paths::EmailTemplates($language);
         return $path;
     }
@@ -98,19 +97,37 @@ class ManageEmailTemplatesPresenter extends ActionPresenter
 
     public function LoadTemplate()
     {
+        $templateName = strtolower($this->page->GetTemplateName());
+        if (!BookedStringHelper::EndsWith($templateName, ".tpl")
+            || BookedStringHelper::Contains($templateName,"..")
+            || BookedStringHelper::Contains($templateName,"\\")
+            || BookedStringHelper::Contains($templateName,"/")) {
+            return "";
+        }
         $templatePath = Paths::EmailTemplates($this->GetSelectedLanguage()) . $this->page->GetTemplateName();
         $customTemplatePath = str_replace('.tpl', '-custom.tpl', $templatePath);
         if ($this->filesystem->Exists($customTemplatePath)) {
             $contents = $this->filesystem->GetFileContents($customTemplatePath);
         }
-        else{
+        elseif($this->filesystem->Exists($templatePath)) {
             $contents = $this->filesystem->GetFileContents($templatePath);
+        }
+        else {
+            $defaultTemplatePath = Paths::EmailTemplates('en_us') . $this->page->GetTemplateName();
+            $contents = $this->filesystem->GetFileContents($defaultTemplatePath);
         }
         $this->page->BindTemplate($this->RemoveComments($contents));
     }
 
     public function LoadOriginalTemplate()
     {
+        $templateName = strtolower($this->page->GetTemplateName());
+        if (!BookedStringHelper::EndsWith($templateName, ".tpl")
+            || BookedStringHelper::Contains($templateName,"..")
+            || BookedStringHelper::Contains($templateName,"\\")
+            || BookedStringHelper::Contains($templateName,"/")) {
+            return "";
+        }
         $templatePath = Paths::EmailTemplates($this->GetSelectedLanguage()) . $this->page->GetTemplateName();
         $contents = $this->filesystem->GetFileContents($templatePath);
         $this->page->BindTemplate($this->RemoveComments($contents));

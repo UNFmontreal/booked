@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -99,7 +99,7 @@ class Configuration implements IConfiguration
     const DEFAULT_CONFIG_ID = 'booked';
     const DEFAULT_CONFIG_FILE_PATH = 'config/config.php';
 
-    const VERSION = '2.7.6';
+    const VERSION = '2.8.2';
 
     protected function __construct()
     {
@@ -132,7 +132,7 @@ class Configuration implements IConfiguration
             throw new Exception("Missing config file: $configFile");
         }
 
-        touch($configFile);
+        //touch($configFile);
 
         $config = new Config();
         $container = $config->parseConfig($configFile, 'PHPArray');

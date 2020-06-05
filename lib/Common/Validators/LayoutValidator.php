@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -57,7 +57,6 @@ class LayoutValidator extends ValidatorBase implements IValidator
 			if (!$this->validateSingle)
 			{
 				Log::Debug('Validating daily layout');
-				Log::Debug(var_export($this->reservableSlots, true));
 				if (count($this->reservableSlots) != DayOfWeek::NumberOfDays || count($this->blockedSlots) != DayOfWeek::NumberOfDays)
 				{
 					$this->isValid = false;

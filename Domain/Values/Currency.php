@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2017-2019 Nick Korbel
+ * Copyright 2017-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -65,6 +65,7 @@ namespace Booked {
 		{
 			return array(
 					new CurrencyDefinition('USD'),
+					new CurrencyDefinition('GBP'),
 					new CurrencyDefinition('AUD'),
 					new CurrencyDefinition('BRL'),
 					new CurrencyDefinition('CAD'),

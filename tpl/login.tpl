@@ -1,5 +1,5 @@
 {*
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -169,6 +169,15 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 
 		if (!langCode)
 		{
+			langCode = (navigator.language+"").replace("-", "_").toLowerCase();
+
+			var availableLanguages = [{foreach from=$Languages item=lang}"{$lang->GetLanguageCode()}",{/foreach}];
+			if (langCode !== "" && langCode != '{$SelectedLanguage|lower}') {
+				if (availableLanguages.indexOf(langCode) !== -1)
+				{
+					window.location.href = url + langCode;
+				}
+			}
 		}
 	});
 </script>

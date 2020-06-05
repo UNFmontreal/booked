@@ -1,5 +1,5 @@
 {*
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -212,7 +212,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
             <div class="modal-body">
                 <div class="form-group">
                     <label for="emailUserAutocomplete" class="no-show">{translate key=User}</label>
-                    <input type="search" id="emailUserAutocomplete"
+                    <input type="search" id="emailUserAutocomplete" name="email"
                            class="form-control" placeholder="{translate key=Email}" autofocus="autofocus" />
                 </div>
 

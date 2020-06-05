@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2017-2019 Nick Korbel
+ * Copyright 2017-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -23,8 +23,8 @@ interface IResourceAvailabilityStrategy
     /**
      * @param Date $startDate
      * @param Date $endDate
-	 * @param int[] $resourceIds
-     * @return array|IReservedItemView[]|int
+	 * @param int[]|int|null $resourceIds
+     * @return array|IReservedItemView[]
      */
     public function GetItemsBetween(Date $startDate, Date $endDate, $resourceIds);
 }
@@ -44,7 +44,7 @@ class ResourceAvailability implements IResourceAvailabilityStrategy
     public function GetItemsBetween(Date $startDate, Date $endDate, $resourceIds)
     {
 		$reservations = $this->_repository->GetReservations($startDate, $endDate, null, null, null, $resourceIds);
-        $blackouts = $this->_repository->GetBlackoutsWithin(new DateRange($startDate, $endDate));
+        $blackouts = $this->_repository->GetBlackoutsWithin(new DateRange($startDate, $endDate), null, $resourceIds);
 
         return array_merge($reservations, $blackouts);
     }

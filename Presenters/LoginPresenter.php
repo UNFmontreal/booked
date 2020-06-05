@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -151,6 +151,7 @@ class LoginPresenter
 		$this->_page->SetRegistrationUrl($this->authentication->GetRegistrationUrl() && !$hideLogin);
 		$this->_page->SetPasswordResetUrl($this->authentication->GetPasswordResetUrl());
 		$this->_page->SetAnnouncements($this->announcementRepository->GetFuture(Pages::ID_LOGIN));
+		$this->_page->SetSelectedLanguage(Resources::GetInstance()->CurrentLanguage);
 	}
 
 	public function Login()

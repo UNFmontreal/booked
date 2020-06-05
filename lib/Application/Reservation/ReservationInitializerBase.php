@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -130,6 +130,11 @@ interface IReservationComponentInitializer
 	 * @param $resource ResourceDto
 	 */
 	public function SetReservationResource($resource);
+
+	/**
+	 * @param $maximum int
+	 */
+	public function SetMaximumResources($maximum);
 
 	/**
 	 * @param $attribute CustomAttribute
@@ -464,8 +469,12 @@ abstract class ReservationInitializerBase implements IReservationInitializer, IR
 		return true;
 	}
 
+	public function SetMaximumResources($maximum)
+	{
+		$this->basePage->SetMaximumResources($maximum);
+	}
 
-    private function SetTermsOfService()
+	private function SetTermsOfService()
     {
         $termsOfService = $this->termsRepository->Load();
         if ($termsOfService != null && $termsOfService->AppliesToReservation()) {

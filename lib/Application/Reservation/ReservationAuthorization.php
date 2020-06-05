@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,14 +17,12 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 interface IReservationAuthorization
 {
 	/**
-	 * @abstract
 	 * @param UserSession $currentUser
 	 * @return bool
 	 */
 	function CanChangeUsers(UserSession $currentUser);
 
 	/**
-	 * @abstract
 	 * @param ReservationView $reservationView
 	 * @param UserSession $currentUser
 	 * @return bool
@@ -32,7 +30,6 @@ interface IReservationAuthorization
 	function CanEdit(ReservationView $reservationView, UserSession $currentUser);
 
 	/**
-	 * @abstract
 	 * @param ReservationView $reservationView
 	 * @param UserSession $currentUser
 	 * @return bool
@@ -40,7 +37,6 @@ interface IReservationAuthorization
 	function CanApprove(ReservationView $reservationView, UserSession $currentUser);
 
 	/**
-	 * @abstract
 	 * @param ReservationView $reservationView
 	 * @param UserSession $currentUser
 	 * @return bool
@@ -62,6 +58,8 @@ class ReservationAuthorization implements IReservationAuthorization
 
 	public function CanEdit(ReservationView $reservationView, UserSession $currentUser)
 	{
+//		$isGroupAdmin = $this->authorizationService->IsAdminFor($currentUser, $reservationView->OwnerId);
+//		$isResourceAdmin = $this->authorizationService->CanEditForResource($currentUser, $resource)
 		if ($currentUser->IsAdmin)
 		{
 			return true;

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2017-2019 Nick Korbel
+ * Copyright 2017-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -47,9 +47,8 @@ class UnavailableResourcesPage extends Page implements IAvailableResourcesPage
 
 	public function PageLoad()
 	{
-		$presenter = new UnavailableResourcesPresenter($this, new ResourceAvailability(new ReservationViewRepository()), ServiceLocator::GetServer()->GetUserSession());
+		$presenter = new UnavailableResourcesPresenter($this, new ResourceAvailability(new ReservationViewRepository()), ServiceLocator::GetServer()->GetUserSession(), new ResourceRepository());
 		$presenter->PageLoad();
-
 	}
 
 	public function GetStartDate()

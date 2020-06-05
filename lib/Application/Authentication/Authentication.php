@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  * Copyright 2012-2014 Moritz Schepp, IST Austria
  *
  * This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
@@ -42,11 +42,16 @@ class Authentication implements IAuthentication
 	 * @var IFirstRegistrationStrategy
 	 */
 	private $firstRegistration;
+	/**
+	 * @var IGroupRepository
+	 */
+	private $groupRepository;
 
-	public function __construct(IRoleService $roleService, IUserRepository $userRepository)
+	public function __construct(IRoleService $roleService, IUserRepository $userRepository, IGroupRepository $groupRepository)
 	{
 		$this->roleService = $roleService;
 		$this->userRepository = $userRepository;
+		$this->groupRepository = $groupRepository;
 	}
 
 	public function SetMigration(PasswordMigration $migration)
@@ -135,7 +140,7 @@ class Authentication implements IAuthentication
 			$user->Login($loginTime, $language);
 			$this->userRepository->Update($user);
 
-			$this->GetFirstRegistrationStrategy()->HandleLogin($user, $this->userRepository);
+			$user = $this->GetFirstRegistrationStrategy()->HandleLogin($user, $this->userRepository, $this->groupRepository);
 
 			return $this->GetUserSession($user, $loginTime);
 		}

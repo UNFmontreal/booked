@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2018-2019 Nick Korbel
+ * Copyright 2018-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -67,6 +67,7 @@ class ReservationEmailPage extends Page implements IReservationEmailPage
 
     public function GetEmailAddresses()
     {
-        return $this->GetForm('email');
+        $email = $this->GetForm('email');
+        return preg_split('/, ?/',$email);
     }
 }

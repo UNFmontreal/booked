@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -29,14 +29,14 @@ class ReservationRepositoryTests extends TestBase
      */
     private $repository;
 
-    public function setup()
+    public function setUp(): void
     {
         parent::setup();
 
         $this->repository = new ReservationRepository();
     }
 
-    public function teardown()
+    public function teardown(): void
     {
         parent::teardown();
 
@@ -143,7 +143,7 @@ class ReservationRepositoryTests extends TestBase
 
         $addAttachment = new AddReservationAttachmentCommand($attachment->FileName(), $attachment->FileType(), $attachment->FileSize(),
             $attachment->FileExtension(), $seriesId);
-        $this->assertEquals(11, count($this->db->_Commands));
+        $this->assertEquals(12, count($this->db->_Commands));
 
         $this->assertEquals($insertReservationSeries, $this->db->_Commands[0]);
         $this->assertEquals($insertReservationResource, $this->db->_Commands[1]);
@@ -181,7 +181,7 @@ class ReservationRepositoryTests extends TestBase
 
         $duration = new TestDateRange();
 
-        $repeats = $this->getMock('IRepeatOptions');
+        $repeats = $this->createMock('IRepeatOptions');
 
         $repeats->expects($this->once())
             ->method('GetDates')
@@ -792,6 +792,7 @@ class ReservationRepositoryTests extends TestBase
         $series->TestSetCreditsConsumed(10);
         $series->WithId($seriesId);
         $series->Delete($deletedBy);
+        $series->WithUnusedCreditBalance(10);
 
         $this->repository->Delete($series);
 

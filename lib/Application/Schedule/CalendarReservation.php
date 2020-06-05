@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -323,7 +323,7 @@ class CalendarReservation
     private function GetUrl()
     {
         if (!empty($this->ReferenceNumber)) {
-            return sprintf('%s?rn=%s', Pages::RESERVATION, $this->ReferenceNumber);
+            return sprintf('%s?rn=%s&redirect=[redirect]', Pages::RESERVATION, $this->ReferenceNumber);
         }
 
         if (!empty($this->ResourceId)) {

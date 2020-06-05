@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2017-2019 Nick Korbel
+ * Copyright 2017-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -87,6 +87,7 @@ class MonitorDisplayPage extends ActionPage implements IMonitorDisplayPage
 
         $this->Set('PopupMonths', $this->IsMobile ? 1 : 3);
         $this->Set('Enabled', $this->IsEnabled());
+        $this->Set('ShouldLogout', false);
     }
 
     public function ProcessAction()

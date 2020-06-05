@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -93,6 +93,8 @@ class ExistingReservationSeriesBuilder
 	public function WithBookedBy(UserSession $user)
 	{
 		$this->bookedBy = $user;
+
+		return $this;
 	}
 
 	/**
@@ -268,4 +270,8 @@ class TestHelperExistingReservationSeries extends ExistingReservationSeries
        $this->_WasCheckedIn = true;
        $this->_CheckedInBy = $checkedInBy;
     }
+
+    public function WithUnusedCreditBalance($balance) {
+		$this->unusedCreditBalance = $balance;
+	}
 }

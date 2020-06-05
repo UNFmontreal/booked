@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2012-2019 Nick Korbel
+Copyright 2012-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -59,6 +59,7 @@ class ParameterNames
 	const ATTRIBUTE_SECONDARY_ENTITY_IDS = '@secondary_entity_ids';
 	const ATTRIBUTE_IS_PRIVATE = '@is_private';
 	const AUTO_RELEASE_MINUTES = '@auto_release_minutes';
+	const ADDITIONAL_PROPERTIES = '@additional_properties';
 
 	const BLACKOUT_SERIES_ID = '@blackout_series_id';
 	const BLACKOUT_INSTANCE_ID = '@blackout_instance_id';
@@ -241,6 +242,8 @@ class ParameterNames
 	const SCHEDULE_AVAILABILITY_END = '@end_date';
 	const SCHEDULE_ALLOW_CONCURRENT_RESERVATIONS = '@allow_concurrent_bookings';
 	const SCHEDULE_DEFAULT_STYLE = '@default_layout';
+	const SCHEDULE_TOTAL_CONCURRENT_RESERVATIONS = '@total_concurrent_reservations';
+	const SCHEDULE_MAX_RESOURCES_PER_RESERVATION = '@max_resources_per_reservation';
 	const SERIES_ID = '@seriesid';
 	const SESSION_TOKEN = '@session_token';
 	const START_DATE = '@startDate';

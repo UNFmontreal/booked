@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -70,7 +70,7 @@ class Server
 		{
 			$parts = parse_url(Configuration::Instance()->GetScriptUrl());
 			$path = isset($parts['path']) ? $parts['path'] : '';
-            $seconds = Configuration::Instance()->GetKey(ConfigKeys::INACTIVITY_TIMEOUT) * 60;
+            $seconds = Configuration::Instance()->GetKey(ConfigKeys::INACTIVITY_TIMEOUT, new IntConverter()) * 60;
             ini_set('session.gc_maxlifetime', $seconds);
             session_set_cookie_params(0, $path);
             @session_unset();

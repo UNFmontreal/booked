@@ -1,5 +1,5 @@
 {*
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -33,7 +33,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
         <div class="reserved {$class} {$OwnershipClass} clickres"
              resid="{$Slot->Id()}" {$color}
              id="{$Slot->Id()}|{$Slot->Date()->Format('Ymd')}">
-            {formatdate date=$Slot->BeginDate() key=period_time} - {formatdate date=$Slot->EndDate() key=period_time}
+            {$DisplaySlotFactory->GetCondensedPeriodLabel($Periods, $Slot->BeginDate(), $Slot->EndDate())}
             {$Slot->Label($SlotLabelFactory)|escapequotes}</div>
     {/function}
 
@@ -71,13 +71,14 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
     {/function}
 
     {function name=displaySlotCondensed}
-        {call name=$DisplaySlotFactory->GetFunction($Slot, $AccessAllowed, 'Condensed') Slot=$Slot Href=$Href}
+        {call name=$DisplaySlotFactory->GetFunction($Slot, $AccessAllowed, 'Condensed') Slot=$Slot Href=$Href Periods=$Periods}
     {/function}
 
     {assign var=TodaysDate value=Date::Now()}
     {assign var=columnWidth value=(1/($BoundDates|count+1))*100}
     <div id="reservations">
         <table class="reservations condensed" border="1" cellpadding="0" style="width:100%;">
+            <thead>
             <tr>
                 <td style="width:{$columnWidth}%">&nbsp;</td>
                 {foreach from=$BoundDates item=date}
@@ -93,7 +94,8 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
                         style="width:{$columnWidth}%">{formatdate date=$date key="schedule_daily"}</td>
                 {/foreach}
             </tr>
-
+            </thead>
+        <tbody>
             {foreach from=$Resources item=resource name=resource_loop}
                 {assign var=resourceId value=$resource->Id}
                 {assign var=href value="{Pages::RESERVATION}?rid={$resourceId}&sid={$ScheduleId}"}
@@ -110,29 +112,33 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
                     </td>
                     {foreach from=$BoundDates item=date}
                         {assign var=ts value=$date->Timestamp()}
-                        {if $periods[$ts]|count == 0}{continue}{*dont show if there are no slots*}{/if}
+                        {$periods.$ts = $DailyLayout->GetPeriods($date, false)}
+                        {assign var=count value=$periods[$ts]|count}
+                        {if $count== 0}{continue}{*dont show if there are no slots*}{/if}
+                        {assign var=min value=$periods[$ts][0]->BeginDate()->TimeStamp()}
+                        {assign var=max value=$periods[$ts][$count-1]->EndDate()->TimeStamp()}
                         {assign var=resourceId value=$resource->Id}
                         {assign var=href value="{Pages::RESERVATION}?rid={$resourceId}&sid={$ScheduleId}"}
-                        {assign var=slots value=$DailyLayout->GetLayout($date, $resourceId)}
-                        {assign var=summary value=$DailyLayout->GetSummary($date, $resourceId)}
-                        {if $summary->NumberOfItems() > 0}
-                            <td style="vertical-align: top;" class="reservable clickres"
-                                ref="{$href}&rd={formatdate date=$date key=url}" data-href="{$href}"
-                                data-start="{$date->Format('Y-m-d H:i:s')|escape:url}"
-                                data-end="{$date->Format('Y-m-d H:i:s')|escape:url}">
-                                <div class="reservable clickres" ref="{$href}&rd={formatdate date=$date key=url}"
-                                     data-href="{$href}" data-start="{$date->Format('Y-m-d H:i:s')|escape:url}"
-                                     data-end="{$date->Format('Y-m-d H:i:s')|escape:url}">
-                                    <i class="fa fa-plus-circle"></i> {translate key=CreateReservation}
-                                    <input type="hidden" class="href" value="{$href}"/>
-                                </div>
-                                {foreach from=$slots item=slot}
-                                    {call name=displaySlotCondensed Slot=$slot Href="$href" AccessAllowed=$resource->CanAccess}
-                                {/foreach}
-                            </td>
-                        {else}
-                            {assign var=href value="{$CreateReservationPage}?rid={$resource->Id}&sid={$ScheduleId}&rd={formatdate date=$date key=url}"}
-                            <td style="vertical-align: top;" class="reservable clickres"
+{*                        {assign var=slots value=$DailyLayout->GetLayout($date, $resourceId)}*}
+{*                        {assign var=summary value=$DailyLayout->GetSummary($date, $resourceId)}*}
+{*                        {if $summary->NumberOfItems() > 0}*}
+{*                            <td style="vertical-align: top;" class="reservable clickres"*}
+{*                                ref="{$href}&rd={formatdate date=$date key=url}" data-href="{$href}"*}
+{*                                data-start="{$date->Format('Y-m-d H:i:s')|escape:url}"*}
+{*                                data-end="{$date->Format('Y-m-d H:i:s')|escape:url}">*}
+{*                                <div class="reservable clickres" ref="{$href}&rd={formatdate date=$date key=url}"*}
+{*                                     data-href="{$href}" data-start="{$date->Format('Y-m-d H:i:s')|escape:url}"*}
+{*                                     data-end="{$date->Format('Y-m-d H:i:s')|escape:url}">*}
+{*                                    <i class="fa fa-plus-circle"></i> {translate key=CreateReservation}*}
+{*                                    <input type="hidden" class="href" value="{$href}"/>*}
+{*                                </div>*}
+{*                                {foreach from=$slots item=slot}*}
+{*                                    {call name=displaySlotCondensed Slot=$slot Href="$href" AccessAllowed=$resource->CanAccess Periods=$periods.$ts }*}
+{*                                {/foreach}*}
+{*                            </td>*}
+{*                        {else}*}
+                            {assign var=href value="{$CreateReservationPage}?rid={$resourceId}&sid={$ScheduleId}&rd={formatdate date=$date key=url}"}
+                            <td style="vertical-align: top;" class=""
                                 ref="{$href}&rd={formatdate date=$date key=url}" data-href="{$href}"
                                 data-start="{$date->Format('Y-m-d H:i:s')|escape:url}"
                                 data-end="{$date->Format('Y-m-d H:i:s')|escape:url}">
@@ -143,11 +149,13 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
                                     <i class="fa fa-plus-circle"></i> {translate key=CreateReservation}
                                     <input type="hidden" class="href" value="{$href}"/>
                                 </div>
+                                <div class="reservations" data-min="{$min}" data-max="{$max}" data-resourceid="{$resourceId}"></div>
                             </td>
-                        {/if}
+{*                        {/if}*}
                     {/foreach}
                 </tr>
             {/foreach}
+        </tbody>
         </table>
     </div>
 {/block}

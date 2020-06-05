@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2018-2019 Nick Korbel
+ * Copyright 2018-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -41,7 +41,6 @@ class SlackPresenter
 
     public function PageLoad()
     {
-        Log::Debug('post %s', var_export($_POST, true));
         $command = $this->page->GetCommand();
         $text = $this->page->GetText();
         $token = $this->page->GetToken();

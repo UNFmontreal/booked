@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2018-2019 Nick Korbel
+ * Copyright 2018-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -19,6 +19,9 @@
  */
 
 header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: "origin, x-requested-with, content-type"');
+header('Access-Control-Allow-Methods: "PUT, GET, POST, DELETE, OPTIONS"');
 
 define('ROOT_DIR', '../../');
 

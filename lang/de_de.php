@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -146,7 +146,7 @@ class de_de extends en_gb
         $strings['ResourceMinNoticeNoneUpdate'] = 'Änderungen von Reservierungen können ohne Vorlaufzeit getätigt werden';
         $strings['ResourceMinNoticeDelete'] = 'Löschungen von Reservierungen müssen mindestens %s vor der Startzeit getätigt werden';
         $strings['ResourceMinNoticeNoneDelete'] = 'Löschungen von Reservierungen können ohne Vorlaufzeit getätigt werden';
-        $strings['ResourceMaxNotice'] = 'Reservierungen dürfen nicht %s vor der aktuellen Zeit enden';
+        $strings['ResourceMaxNotice'] = 'Reservierungen dürfen nicht mehr als %s nach der aktuellen Zeit enden';
         $strings['ResourceMaxNoticeNone'] = 'Reservierungen können zu jeder Zeit enden';
         $strings['ResourceBufferTime'] = 'Zwischen Reservierungen muss ein Puffer von %s liegen';
         $strings['ResourceBufferTimeNone'] = 'Es gibt keinen Puffer zwischen den Reservierungen';
@@ -557,7 +557,7 @@ class de_de extends en_gb
         $strings['FindATime'] = 'Termin finden';
         $strings['AnyResource'] = 'Irgendeine Ressource';
         $strings['ThisWeek'] = 'Diese Woche';
-        $strings['Hours'] = 'Studnden';
+        $strings['Hours'] = 'Stunden';
         $strings['Minutes'] = 'Minuten';
         $strings['ImportICS'] = 'Aus ICS_Datei importieren';
         $strings['ImportQuartzy'] = 'Von Quartzy importieren';
@@ -726,6 +726,8 @@ class de_de extends en_gb
         $strings['OnlyViewedCalendar'] = 'Dieser Terminplan kann nur aus der Kalenderansicht betrachtet werden';
         $strings['Grid'] = 'Raster';
         $strings['List'] = 'Liste';
+        $strings['ReservationParticipationActivityPreference'] = 'Wenn jemand meiner Reservierung beitritt oder sie verlässt';
+        $strings['ReservationSeriesEndingPreference'] = 'Wenn die Serie meiner wiederkehrenden Reservierungen endet';
         // End Strings
 
         // Install

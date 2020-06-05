@@ -1,21 +1,21 @@
 <?php
 /**
-Copyright 2012-2019 Nick Korbel
-
-This file is part of Booked Scheduler.
-
-Booked Scheduler is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Booked Scheduler is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
+ * Copyright 2012-2020 Nick Korbel
+ *
+ * This file is part of Booked Scheduler.
+ *
+ * Booked Scheduler is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Booked Scheduler is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 class ScheduleResponse extends RestResponse
@@ -29,7 +29,8 @@ class ScheduleResponse extends RestResponse
 	public $icsUrl;
 	public $availabilityStart;
 	public $availabilityEnd;
-	public $allowConcurrentReservations;
+	public $maxResourcesPerReservation;
+	public $totalConcurrentReservationsAllowed;
 
 	/**
 	 * @var array|SchedulePeriodResponse[]
@@ -46,7 +47,8 @@ class ScheduleResponse extends RestResponse
 		$this->weekdayStart = $schedule->GetWeekdayStart();
 		$this->availabilityStart = $schedule->GetAvailabilityBegin()->ToIso();
 		$this->availabilityEnd = $schedule->GetAvailabilityEnd()->ToIso();
-		$this->allowConcurrentReservations = $schedule->GetAllowConcurrentReservations();
+		$this->maxResourcesPerReservation = $schedule->GetMaxResourcesPerReservation();
+		$this->totalConcurrentReservationsAllowed = $schedule->GetTotalConcurrentReservations();
 
 		if ($schedule->GetIsCalendarSubscriptionAllowed())
 		{
@@ -55,7 +57,7 @@ class ScheduleResponse extends RestResponse
 		}
 
 		$layoutDate = Date::Now()->ToTimezone($server->GetSession()->Timezone);
-		for($day = 0; $day < 7; $day++)
+		for ($day = 0; $day < 7; $day++)
 		{
 			$periods = $layout->GetLayout($layoutDate);
 			foreach ($periods as $period)
@@ -74,6 +76,13 @@ class ScheduleResponse extends RestResponse
 
 class SchedulePeriodResponse
 {
+	public $start;
+	public $end;
+	public $label;
+	public $startTime;
+	public $endTime;
+	public $isReservable;
+
 	public function __construct(SchedulePeriod $schedulePeriod)
 	{
 		$this->start = $schedulePeriod->BeginDate()->ToIso();
@@ -103,7 +112,8 @@ class ExampleScheduleResponse extends ScheduleResponse
 		$this->icsUrl = 'webcal://url/to/calendar';
 		$this->availabilityStart = Date::Now()->ToIso();
 		$this->availabilityEnd = Date::Now()->ToIso();
-		$this->allowConcurrentReservations = true;
+		$this->maxResourcesPerReservation = 10;
+		$this->totalConcurrentReservationsAllowed = 0;
 
 		foreach (DayOfWeek::Days() as $day)
 		{

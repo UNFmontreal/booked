@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -119,7 +119,7 @@ class ReservationRepository implements IReservationRepository
                 $this->AddReservationAttachment($attachment);
             }
 
-            $creditsToDeduct = $reservationSeries->GetCreditsRequired() - $reservationSeries->GetCreditsConsumed();
+            $creditsToDeduct = $reservationSeries->GetCreditsRequired() - $reservationSeries->GetOriginalCreditsConsumed();
 
             Log::Debug('CREDITS - Reservation update adjusting credits for user %s by %s. Required %s, consumed %s',
                 $reservationSeries->UserId(), $creditsToDeduct, $reservationSeries->GetCreditsRequired(), $reservationSeries->GetCreditsConsumed());
@@ -218,7 +218,9 @@ class ReservationRepository implements IReservationRepository
     {
         $database = ServiceLocator::GetDatabase();
 
-        $creditAdjustment = 0 - $existingReservationSeries->GetCreditsConsumed();
+//        $creditAdjustment = 0 - $existingReservationSeries->GetCreditsConsumed();
+//		$creditAdjustment = $existingReservationSeries->GetCreditsRequired() - $existingReservationSeries->GetOriginalCreditsConsumed();
+		$creditAdjustment = 0 - $existingReservationSeries->GetUnusedCreditBalance();
         if ($creditAdjustment != 0) {
             Log::Debug('CREDITS - Reservation delete adjusting credits for user %s by %s', $existingReservationSeries->UserId(), $creditAdjustment);
 
@@ -266,13 +268,22 @@ class ReservationRepository implements IReservationRepository
     {
         $series = new ExistingReservationSeries();
         if ($row = $reader->GetRow()) {
+            $seriesId = $row[ColumnNames::SERIES_ID];
             $repeatType = $row[ColumnNames::REPEAT_TYPE];
             $configurationString = $row[ColumnNames::REPEAT_OPTIONS];
 
-            $repeatOptions = $this->BuildRepeatOptions($repeatType, $configurationString);
+            $repeatDates = [];
+            if ($repeatType == RepeatType::Custom) {
+                $getRepeatDates = new GetReservationRepeatDatesCommand($seriesId);
+                $repeatReader = ServiceLocator::GetDatabase()->Query($getRepeatDates);
+                while ($repeatRow = $repeatReader->GetRow()) {
+                    $repeatDates[] = Date::FromDatabase($repeatRow[ColumnNames::RESERVATION_START]);
+                }
+                $repeatReader->Free();
+            }
+            $repeatOptions = $this->BuildRepeatOptions($repeatType, $configurationString, $repeatDates);
             $series->WithRepeatOptions($repeatOptions);
 
-            $seriesId = $row[ColumnNames::SERIES_ID];
             $title = $row[ColumnNames::RESERVATION_TITLE];
             $description = $row[ColumnNames::RESERVATION_DESCRIPTION];
 
@@ -290,8 +301,9 @@ class ReservationRepository implements IReservationRepository
             $instance = new Reservation($series, $duration, $row[ColumnNames::RESERVATION_INSTANCE_ID], $row[ColumnNames::REFERENCE_NUMBER]);
             $instance->WithCheckin(Date::FromDatabase($row[ColumnNames::CHECKIN_DATE]), Date::FromDatabase($row[ColumnNames::CHECKOUT_DATE]));
             $instance->WithCreditsConsumed($row[ColumnNames::CREDIT_COUNT]);
+			$instance->SetCreditsRequired($row[ColumnNames::CREDIT_COUNT]);
 
-            $series->WithCurrentInstance($instance);
+			$series->WithCurrentInstance($instance);
         }
         $reader->Free();
 
@@ -313,6 +325,7 @@ class ReservationRepository implements IReservationRepository
                 $row[ColumnNames::REFERENCE_NUMBER]);
             $reservation->WithCheckin(Date::FromDatabase($row[ColumnNames::CHECKIN_DATE]), Date::FromDatabase($row[ColumnNames::CHECKOUT_DATE]));
             $reservation->WithCreditsConsumed($row[ColumnNames::CREDIT_COUNT]);
+            $reservation->SetCreditsRequired($row[ColumnNames::CREDIT_COUNT]);
 
             $series->WithInstance($reservation);
         }
@@ -414,12 +427,12 @@ class ReservationRepository implements IReservationRepository
         $reader->Free();
     }
 
-    private function BuildRepeatOptions($repeatType, $configurationString)
+    private function BuildRepeatOptions($repeatType, $configurationString, $repeatDates)
     {
         $configuration = RepeatConfiguration::Create($repeatType, $configurationString);
         $factory = new RepeatOptionsFactory();
         return $factory->Create($repeatType, $configuration->Interval, $configuration->TerminationDate,
-            $configuration->Weekdays, $configuration->MonthlyType);
+            $configuration->Weekdays, $configuration->MonthlyType, $repeatDates);
     }
 
     // LOAD BY ID HELPER FUNCTIONS END
@@ -727,7 +740,13 @@ class InstanceAddedEventCommand extends EventCommand
             $this->instance->GetCreditsRequired());
 
         $reservationId = $database->ExecuteInsert($insertReservation);
-
+//
+//        if ($reservationId <= 0)
+//        {
+//            $database->Execute(new DeleteSeriesPermanantCommand($this->series->SeriesId()));
+//            Log::Error("Could not insert reservation because there were conflicts. Command: %s", $insertReservation);
+//            throw new Exception("Could not insert reservation - conflicting times");
+//        }
         $insertReservationUser = new AddReservationUserCommand($reservationId, $this->series->UserId(), ReservationUserLevel::OWNER);
 
         $database->Execute($insertReservationUser);

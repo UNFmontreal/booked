@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2018-2019 Nick Korbel
+Copyright 2018-2020 Nick Korbel
 
 This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -26,5 +26,7 @@ class SamlConfig {
     const PHONE = 'simplesamlphp.phone';
     const ORGANIZATION = 'simplesamlphp.organization';
     const POSITION = 'simplesamlphp.position';
+    const GROUPS = 'simplesamlphp.groups';
     const RETURN_TO = 'simplesamlphp.return.to';
+    const SYNC_GROUPS = 'simplesamlphp.sync.groups';
 }

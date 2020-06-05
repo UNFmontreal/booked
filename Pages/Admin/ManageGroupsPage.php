@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2019 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  *
  * This file is part of Booked Scheduler.
  *
@@ -246,7 +246,7 @@ class ManageGroupsPage extends ActionPage implements IManageGroupsPage
 
     public function GetUserIds()
     {
-        return [];
+        return array();
     }
 
     public function BindSchedules($schedules)

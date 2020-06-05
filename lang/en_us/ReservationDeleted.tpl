@@ -1,5 +1,5 @@
 {*
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -64,6 +64,14 @@ Delete Reason: {$DeleteReason|nl2br}<br/>
         <br/>
     {/foreach}
 {/if}
+
+{if !empty($CreatedBy)}
+    <br/>
+    Deleted by: {$CreatedBy}
+{/if}
+
+<br/>
+Reference Number: {$ReferenceNumber}
 
 <br/>
 <a href="{$ScriptUrl}">Log in to {$AppTitle}</a>

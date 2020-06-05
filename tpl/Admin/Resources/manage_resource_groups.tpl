@@ -1,5 +1,5 @@
 {*
-Copyright 2011-2019 Nick Korbel
+Copyright 2011-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -48,12 +48,6 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 	</div>
 
 	<div class="clearfix"></div>
-
-	<div class="alert alert-warning" id="resourceGroupWarning" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-					aria-hidden="true">&times;</span></button>
-		{translate key=ResourceGroupWarning}
-	</div>
 
 	<input type="hidden" id="activeId" value=""/>
 

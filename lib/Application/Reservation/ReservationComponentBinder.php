@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2012-2019 Nick Korbel
+Copyright 2012-2020 Nick Korbel
 
 This file is part of Booked Scheduler is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -177,10 +177,15 @@ class ReservationResourceBinder implements IReservationComponentBinder
 	 * @var IResourceService
 	 */
 	private $resourceService;
+	/**
+	 * @var IScheduleRepository
+	 */
+	private $scheduleRepository;
 
-	public function __construct(IResourceService $resourceService)
+	public function __construct(IResourceService $resourceService, IScheduleRepository $scheduleRepository)
 	{
 		$this->resourceService = $resourceService;
+		$this->scheduleRepository = $scheduleRepository;
 	}
 
 	public function Bind(IReservationComponentInitializer $initializer)
@@ -204,12 +209,14 @@ class ReservationResourceBinder implements IReservationComponentBinder
 			return;
 		}
 
+		$schedule = $this->scheduleRepository->LoadById($requestedScheduleId);
 		$initializer->BindResourceGroups($groups);
 		$initializer->BindAvailableResources($resources);
 		$accessories = $this->resourceService->GetAccessories();
 		$initializer->BindAvailableAccessories($accessories);
 		$initializer->ShowAdditionalResources($bindableResourceData->NumberAccessible > 0);
 		$initializer->SetReservationResource($bindableResourceData->ReservationResource);
+		$initializer->SetMaximumResources($schedule->GetMaxResourcesPerReservation());
 	}
 
 	/**
@@ -284,6 +291,7 @@ class ReservationDetailsBinder implements IReservationComponentBinder
 		$this->page->SetRepeatType($this->reservationView->RepeatType);
 		$this->page->SetRepeatInterval($this->reservationView->RepeatInterval);
 		$this->page->SetRepeatMonthlyType($this->reservationView->RepeatMonthlyType);
+		$this->page->SetCustomRepeatDates($this->reservationView->CustomRepeatDates);
 
 		if ($this->reservationView->RepeatTerminationDate != null)
 		{

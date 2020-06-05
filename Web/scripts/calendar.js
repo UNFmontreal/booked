@@ -1,6 +1,7 @@
 function Calendar(opts) {
     var _options = opts;
     var _fullCalendar;
+    var dateVar = null;
 
     var dayDialog = $('#dayDialog');
 
@@ -47,6 +48,12 @@ function Calendar(opts) {
             eventRender: function (event, element, view) {
                 if (!_.isEmpty(event.id)) {
                     element.attachReservationPopup(event.id);
+                    var moment = view.start;
+                    if (view.type == "month") {
+                        moment = view.currentRange.start;
+                    }
+                    var redirect = _options.returnTo + encodeURIComponent('?ct=' + view.name + '&start=' + moment.year() + '-' + (moment.month() + 1) + '-' + moment.date())
+                    element.attr('href', event.url.replace('[redirect]', redirect));
                 }
             },
             dayClick: dayClick,
@@ -273,8 +280,6 @@ function Calendar(opts) {
         }
     };
 
-    var dateVar = null;
-
     var dayClick = function (date, jsEvent, view) {
         dateVar = date;
 
@@ -319,7 +324,7 @@ function Calendar(opts) {
 
     var openNewReservation = function () {
         var view = _fullCalendar.fullCalendar('getView');
-        var end = dateVar.add(30, 'minutes');
+        var end = moment(dateVar).add(30, 'minutes');
         var year = dateVar.year();
         var month = dateVar.month() + 1;
         var day = dateVar.date();

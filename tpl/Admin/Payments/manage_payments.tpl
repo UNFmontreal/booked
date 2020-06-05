@@ -1,5 +1,5 @@
 {*
-Copyright 2017-2019 Nick Korbel
+Copyright 2017-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -66,7 +66,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
                           action="{$smarty.server.SCRIPT_NAME}">
                         <div class="form-group">
                             <label for="creditCost" class="inline-block">{translate key=CreditsCost}</label>
-                            <input type="number" min="0" max="1000000000" id="creditCost" step=".1"
+                            <input type="number" min="0" max="1000000000" id="creditCost" step="any"
                                    class="form-control inline-block" style="width:auto;" {formname key=CREDIT_COST}
                                    value="{$CreditCost}"/>
                             <label for="creditCurrency" class="inline-block no-show">{translate key=Currency}</label>
@@ -168,7 +168,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="refundAmount">{translate key='RefundAmount'}</label>
-                            <input type="number" id="refundAmount" min=".01" class="form-control" {formname key=REFUND_AMOUNT}/>
+                            <input type="number" id="refundAmount" min=".01" step="any" class="form-control" {formname key=REFUND_AMOUNT}/>
                             <input type="hidden" id="refundId" {formname key=REFUND_TRANSACTION_ID} />
                         </div>
                     </div>

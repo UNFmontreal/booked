@@ -1,6 +1,6 @@
 <?php
 /**
-Copyright 2013-2019 Nick Korbel
+Copyright 2013-2020 Nick Korbel
 
 This file is part of Booked Scheduler.
 
@@ -110,7 +110,6 @@ class Reminder
         $addresses = explode(',',str_replace(' ', '', $reminder->Address()));
         foreach($addresses as $address)
         {
-            var_dump($address);
             if(ctype_digit($address))
             {
                 $gv->sms($address,$message);
